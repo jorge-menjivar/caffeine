@@ -1,0 +1,96 @@
+//@import '../../node_modules/bootstrap/scss/bootstrap';
+//@import '../editor_theme';
+//@import '../editor_size';
+//@import '../styles';
+//
+//.code-editor {
+//  display: flex;
+//  //height: calc(100vh - 1px);
+//  height: 20%;
+//  min-width: 200px;
+//  width: 100% !important;
+//}
+//
+//.code-editor-line-numbers {
+//  background-color: $color-code-editor-line-numbers-bg;
+//  color: $color-code-editor-line-numbers-font;
+//  display: inline-block;
+//  padding: $pad-code-editor-line-number-section;
+//  width: $size-code-editor-font + $pad-code-editor-line-number-section;
+//}
+//
+//.code-editor-line-number {
+//  font-size: $size-code-editor-font;
+//  line-height: $line-height-code-editor;
+//  min-width: 20px;
+//  overflow: clip;
+//  text-align: center;
+//  white-space: nowrap;
+//}
+//
+//.code-editor-code-section {
+//  background-color: $color-code-editor-bg;
+//  color: $color-code-syntax-normal;
+//  display: inline-block;
+//  font-family: $ff-code-editor;
+//  font-size: $size-code-editor-font;
+//  line-height: $line-height-code-editor;
+//  outline: none;
+//  overflow-x: scroll;
+//  padding: 12px 12px;
+//  width: 100%;
+//  overflow-wrap: break-word;
+//  -webkit-line-break: after-white-space;
+//  white-space: pre;
+//}
+//
+//.code-editor-line {
+//  overflow: visible;
+//  //white-space: pre;
+//  //padding: 4px 0;
+//}
+//
+//.bracket {
+//  color: $color-code-syntax-bracket;
+//  font-style: $style-code-syntax-bracket;
+//}
+//
+//.class {
+//  color: $color-code-syntax-class;
+//  font-style: $style-code-syntax-class;
+//}
+//
+//.comment {
+//  color: $color-code-syntax-comment;
+//  font-style: $style-code-syntax-comment;
+//}
+//
+//.function {
+//  color: $color-code-syntax-function;
+//  font-style: $style-code-syntax-function;
+//}
+//
+//.language {
+//  color: $color-code-syntax-language;
+//  font-style: $style-code-syntax-language;
+//}
+//
+//.normal {
+//   color: $color-code-syntax-normal;
+//   font-style: $style-code-syntax-normal;
+// }
+//
+//.string {
+//  color: $color-code-syntax-string;
+//  font-style: $style-code-syntax-string;
+//}
+//
+//.unknown {
+//  color: $color-code-syntax-unknown;
+//  font-style: $style-code-syntax-unknown;
+//}
+//
+//.variable {
+//  color: $color-code-syntax-variable;
+//  font-style: $style-code-syntax-variable;
+//}

@@ -1,0 +1,18 @@
+@import '../editor_theme';
+@import '../editor_size';
+@import '../styles';
+
+.text-editor-block {
+  background-color: $color-text-editor-bg;
+  border: 0;
+  color: $color-text-editor-font;
+  font-size: $size-text-editor-font;
+  margin: 0;
+  min-height: $size-text-editor-font;
+  min-width: 200px;
+  outline: none !important;
+  position: static;
+  resize: none;
+  width: 100% !important;
+  padding: 12px 12px;
+}

@@ -1,0 +1,35 @@
+//@import '../node_modules/bootstrap/scss/bootstrap';
+$dark-editor: true !default;
+
+$color-text-editor-bg: #fff !default;
+$color-text-editor-font: #000 !default;
+//$color-code-editor-line-numbers-bg: #c9d1d9 !default;
+//$color-code-editor-line-numbers-font: #490f58 !default;
+//$color-code-editor-bg: #fff !default;
+//$color-code-syntax-bracket: #9876aa !default;
+//$color-code-syntax-class: #e06c75 !default;
+//$color-code-syntax-comment: $gray-600 !default;
+//$color-code-syntax-function: #61afef !default;
+//$color-code-syntax-language: #cc7832 !default;
+//$color-code-syntax-normal: $gray-400 !default;
+//$color-code-syntax-string: #98c379 !default;
+//$color-code-syntax-unknown: $gray-400 !default;
+//$color-code-syntax-variable: #d19a66 !default;
+
+//$style-code-syntax-bracket: italic !default;
+//$style-code-syntax-class: normal !default;
+//$style-code-syntax-comment: italic !default;
+//$style-code-syntax-function: normal !default;
+//$style-code-syntax-language: italic !default;
+//$style-code-syntax-normal: normal !default;
+//$style-code-syntax-string: normal !default;
+//$style-code-syntax-unknown: normal !default;
+//$style-code-syntax-variable: normal !default;
+
+@if $dark-editor {
+  $color-text-editor-bg: #0d1217;
+  $color-text-editor-font: #fff;
+  //$color-code-editor-line-numbers-bg: #0d0217;
+  //$color-code-editor-line-numbers-font: #8b949e;
+  //$color-code-editor-bg: #0d1217;
+}

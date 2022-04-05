@@ -1,0 +1,12 @@
+@import '../editor_theme';
+@import '../editor_size';
+@import '../styles';
+
+.monaco-editor-block {
+  height: 250px;
+  min-width: 200px;
+  width: 100%;
+  border: 0 solid transparent;
+  position: static;
+}
+

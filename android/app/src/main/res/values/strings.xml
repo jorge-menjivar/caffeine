@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Caffeine</string>
+    <string name="title_activity_main">Caffeine</string>
+    <string name="package_name">eth.jorgemenjivar.caffeine</string>
+    <string name="custom_url_scheme">eth.jorgemenjivar.caffeine</string>
+</resources>
