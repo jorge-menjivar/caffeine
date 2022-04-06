@@ -1,6 +1,0 @@
-{
-	"appId": "eth.jorgemenjivar.caffeine",
-	"appName": "Caffeine",
-	"webDir": "./dist/",
-	"bundledWebRuntime": false
-}
