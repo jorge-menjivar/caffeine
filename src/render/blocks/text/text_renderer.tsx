@@ -29,7 +29,6 @@ export function TextRenderer(value: string) {
                 editor.dispose();
             };
         }
-
     })
 
     if (value[0] === "#") {
