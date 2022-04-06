@@ -3,11 +3,20 @@ An open source note-taking app. Work in progress.
 
 # Contribute
 
-You can get test the app by following the next steps. In the project directory:
+You can get test the app by following the next steps.
 
 1. Run `npm install` to download project dependencies.
 2. Run `npm run build` to generate production files.
-3. Run `npm run electron` to start the app.
+## Run on Windows/MacOS/Linux
+1. Run `npm run electron` to start the app.
+
+## Run on iOS (Xcode and macOS required)
+1. Run `npx cap add ios` to add the required packages to your project.
+2. Run `npx cap run ios` to start the app in a device or simulator.
+
+## Run on Android (Android Studio required)
+1. Run `npx cap add android` to add the required packages to your project.
+2. Run `npx cap run android` to start the app in a device or emulator.
 
 # Project Structure
 
