@@ -1,0 +1,19 @@
+@import '../editor_theme';
+@import '../editor_size';
+@import '../styles';
+
+.h4-text {
+  background-color: $color-text-editor-bg;
+  border: 0;
+  color: $color-text-editor-font;
+  font-size: $font-size-h4-text;
+  line-height: $line-height-text-editor;
+  margin: 0;
+  min-height: $font-size-h4-text;
+  min-width: 200px;
+  //outline: none !important;
+  position: static;
+  resize: none;
+  width: 100% !important;
+  padding: 0 12px !important;
+}
