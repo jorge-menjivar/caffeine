@@ -4,15 +4,14 @@
 
 .text-line {
   background-color: $color-text-editor-bg;
-  border: 0;
   color: $color-text-editor-font;
+  font-family: $ff-text-editor;
   font-size: $font-size-text-line;
+  line-height: $line-height-text-editor;
   margin: 0;
   min-height: $font-size-text-line;
   min-width: 200px;
-  outline: #fff !important;
+  outline: none;
   position: static;
-  resize: none;
-  width: 100% !important;
-  padding: 12px 12px;
+  padding: 0px 12px;
 }

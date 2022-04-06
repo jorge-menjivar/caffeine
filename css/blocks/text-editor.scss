@@ -5,13 +5,14 @@
 .text-editor {
   background-color: $color-text-editor-bg;
   color: $color-text-editor-font;
-  cursor: text;
   font-family: $ff-text-editor;
   font-size: $font-size-text-line;
   line-height: $line-height-text-editor;
   margin: 0;
   min-height: $font-size-text-line;
+  min-width: 200px;
   outline: none;
-  padding: 0 12px !important;
+  position: static;
+  padding: 0px 12px !important;
   white-space: initial;
 }

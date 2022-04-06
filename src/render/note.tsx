@@ -106,10 +106,8 @@ function App() {
     }
 
     return (
-        <div className="container-fluid">
-            <h1>Note</h1>
+        <div className="note">
             {blocks.map((block) => block.component)}
-            <br/>
         </div>
     );
 }
