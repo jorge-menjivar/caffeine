@@ -1,6 +1,8 @@
 # Caffeine
 An open source note-taking app. Work in progress.
 
+![](./example_images/pic1.png)
+
 # Contribute
 
 You can get test the app by following the next steps.
