@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 
-export function TextEditor(value: string, ref: any, id: any) {
+export function BlockEditor(value: string, ref: any, id: any) {
     // const ref = useRef(null)
     useEffect(() => {
         // Position caret at the end of the line

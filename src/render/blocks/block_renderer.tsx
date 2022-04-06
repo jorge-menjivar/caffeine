@@ -1,13 +1,13 @@
 import * as monaco from "monaco-editor";
 import React, {ReactElement, useEffect, useRef} from "react";
-import {TextLine} from "./line";
-import {H1Text} from "./h1";
-import {H2Text} from "./h2";
-import {H3Text} from "./h3";
-import {H4Text} from "./h4";
-import {MonacoEditor} from "../code/monaco_editor";
+import {TextLine} from "./text/line";
+import {H1Text} from "./text/h1";
+import {H2Text} from "./text/h2";
+import {H3Text} from "./text/h3";
+import {H4Text} from "./text/h4";
+import {MonacoEditor} from "./code/monaco_editor";
 
-export function TextRenderer(value: string) {
+export function BlockRenderer(value: string) {
     let ref = useRef<HTMLDivElement>(null);
     let editor: monaco.editor.IStandaloneCodeEditor;
     let type = useRef('text-line');

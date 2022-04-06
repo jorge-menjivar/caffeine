@@ -1,13 +1,13 @@
 import React, {useRef} from "react";
-import {TextRenderer} from "./text_renderer";
-import {TextEditor} from "./text_editor";
+import {BlockRenderer} from "./block_renderer";
+import {BlockEditor} from "./block_editor";
 
-export function TextComponent(props: {onKeyPress: any, onClick:any, id: number, innerRef: any}) {
+export function BlockComponent(props: {onKeyPress: any, onClick:any, id: number, innerRef: any}) {
     const [text, setText] = React.useState("");
     const [editing, isEditing] = React.useState(true);
     const editorRef = React.createRef<HTMLDivElement>()
-    const textRenderer = TextRenderer(text);
-    const textEditor = TextEditor(text, editorRef, props.id);
+    const textRenderer = BlockRenderer(text);
+    const textEditor = BlockEditor(text, editorRef, props.id);
 
     function keyListener(event: any) {
         if (!isCommand()) {

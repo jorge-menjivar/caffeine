@@ -3,14 +3,14 @@ import React, {useEffect, useRef, useState} from 'react';
 import '../../css/editor.css';
 
 
-import { TextComponent } from './blocks/text/text'
+import { BlockComponent } from './blocks/block'
 
 function App() {
 
     const [focus, setFocus] = useState(0)
     let tmpRef = React.createRef<HTMLDivElement>()
     const [blocks, setBlocks] = useState([{
-        component: <TextComponent onKeyPress={KeyListener} onClick={ClickListener} key={0} id={0} innerRef={tmpRef}/>,
+        component: <BlockComponent onKeyPress={KeyListener} onClick={ClickListener} key={0} id={0} innerRef={tmpRef}/>,
         id: 0,
         ref: tmpRef
     }]);
@@ -88,7 +88,7 @@ function App() {
             setBlocks([
                 ...blocksRef.current,
                 {
-                    component: <TextComponent onKeyPress={KeyListener} onClick={ClickListener} key={nextBlockID} id={nextBlockID} innerRef={ref}/>,
+                    component: <BlockComponent onKeyPress={KeyListener} onClick={ClickListener} key={nextBlockID} id={nextBlockID} innerRef={ref}/>,
                     id: nextBlockID,
                     ref: ref
                 }
