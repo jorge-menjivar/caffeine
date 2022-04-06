@@ -10,10 +10,10 @@ import {MonacoEditor} from "./code/monaco_editor";
 export function BlockRenderer(value: string) {
     let ref = useRef<HTMLDivElement>(null);
     let editor: monaco.editor.IStandaloneCodeEditor;
-    let type = useRef('text-line');
+    let type = 'text-line';
 
     useEffect(() => {
-        if (type.current === 'code' && ref.current) {
+        if (type === 'code' && ref.current) {
             editor = monaco.editor.create(
                 ref.current,
                 {
@@ -33,21 +33,21 @@ export function BlockRenderer(value: string) {
 
     if (value[0] === "#") {
         if (value[1] === " "){
-            type.current = 'h1';
+            type = 'h1';
             console.log("h1")
         }
         else if (value[1] === "#") {
             if (value[2] === " ") {
-                type.current = 'h2';
+                type = 'h2';
                 console.log("h2")
             }
             else if (value[2] === "#") {
                 if (value[3] === " ") {
-                    type.current = 'h3';
+                    type = 'h3';
                     console.log("h3")
                 }
                 else if (value[3] === "#" && value[4] === " ") {
-                    type.current = 'h4';
+                    type = 'h4';
                     console.log("h4")
                 }
                 else {
@@ -60,11 +60,11 @@ export function BlockRenderer(value: string) {
     // Text is a command
     else if (value === "\\code") {
         console.log("code command")
-        type.current = 'code';
+        type = 'code';
     }
 
     let child: ReactElement;
-    switch(type.current) {
+    switch(type) {
         case 'text-line':
             child = TextLine(value);
             break;

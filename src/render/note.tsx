@@ -45,7 +45,7 @@ function App() {
     }
 
     function KeyListener(event: any, id: number, isEmpty: boolean) {
-        if (event.shiftKey && event.key === "Enter") {
+        if (event.key === "Enter") {
             manageEnter(id);
         }
         else if (event.key == "Backspace") {

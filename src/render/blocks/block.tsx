@@ -15,7 +15,7 @@ export function BlockComponent(props: {onKeyPress: any, onClick:any, id: number,
             props.onKeyPress(event, props.id, isEmpty);
 
             // console.log(`Text: ${text}`)
-            if (event.shiftKey && event.key === "Enter") {
+            if (event.key === "Enter") {
                 // save(editorRef.current.textContent)
                 save(event.currentTarget.textContent)
             }
@@ -40,15 +40,15 @@ export function BlockComponent(props: {onKeyPress: any, onClick:any, id: number,
 
         if (editorRef.current) {
             // console.log('editorRef current')
-            if (text.length > 0) {
-                // console.log("in effect")
-                let range = document.createRange();
-                let set = window.getSelection();
-                range.setStart( editorRef.current.childNodes[0], text.length);
-                range.collapse(true);
-                set.removeAllRanges();
-                set.addRange(range);
-            }
+            // if (text.length > 0) {
+            //     // console.log("in effect")
+            //     let range = document.createRange();
+            //     let set = window.getSelection();
+            //     range.setStart( editorRef.current.childNodes[0], text.length);
+            //     range.collapse(true);
+            //     set.removeAllRanges();
+            //     set.addRange(range);
+            // }
 
             editorRef.current.focus();
         }
