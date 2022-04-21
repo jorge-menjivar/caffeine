@@ -5,7 +5,7 @@ import { ipcRenderer, KeyboardEvent } from 'electron'
 import '../../css/editor.css';
 
 
-import { BlockComponent } from './blocks/block'
+import { BlockComponent } from './blocks/desktop_block'
 
 function App() {
 

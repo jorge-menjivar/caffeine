@@ -1,11 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { KeyboardEvent } from 'electron'
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { FilePicker } from '@robingenz/capacitor-file-picker';
 
 // import '../watcher/watcher';
 import '../../css/editor.css';
 
 
-import { BlockComponent } from './blocks/block'
+import { BlockComponent } from './blocks/mobile_block'
 
 function App() {
 
@@ -63,9 +65,19 @@ function App() {
         return;
     }
 
-    function SaveListener(event: KeyboardEvent) {
+    async function SaveListener(event: KeyboardEvent) {
         console.log("in save listener")
+        
+        await pickFiles()
     }
+
+    const pickFiles = async () => {
+        const result = await FilePicker.pickFiles({
+          types: ['text/plain'],
+          multiple: false
+        });
+    };
+
 
     function manageBackspace(currentBlockID: number, isEmpty: boolean) {
         // Deleting current block
