@@ -35,7 +35,7 @@ caffeine
 │
 │
 └───src
-│   └───app
+│   └───electron
 │   │   │   main.ts           <- Electron code for starting the app
 │   │   │
 │   │   
@@ -44,8 +44,10 @@ caffeine
 │   │   │
 │   │   
 │   └───render
-│   │   │   note.tsx          <- React component in charge of rendering a note file
-│   │   │   renderer.tsx      <- Script in charge of rendering the app
+│   │   │   desktop_note.tsx    <- Component in charge of rendering note file on desktop
+│   │   │   desktop_renderer.tsx<- Script in charge of rendering desktop app
+│   │   │   mobile_note.tsx     <- Component in charge of rendering note file on mobile
+│   │   │   mobile_renderer.tsx <- Script in charge of rendering mobile app
 │   │   │
 │   │   └───blocks
 │   │       │   block.tsx          <- Component in charge of toggling edit/render block
