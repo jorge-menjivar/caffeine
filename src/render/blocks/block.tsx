@@ -2,7 +2,8 @@ import React, {useRef} from "react";
 import {BlockRenderer} from "./block_renderer";
 import {BlockEditor} from "./block_editor";
 
-export function BlockComponent(props: {onKeyPress: any, onClick:any, id: number, innerRef: any}) {
+export function BlockComponent(
+    props: {onKeyPress: any, onClick:any, onSave:any, id: number, innerRef: any}) {
     const [text, setText] = React.useState("");
     const [editing, isEditing] = React.useState(true);
     const editorRef = React.createRef<HTMLDivElement>()
@@ -44,7 +45,7 @@ export function BlockComponent(props: {onKeyPress: any, onClick:any, id: number,
             //     // console.log("in effect")
             //     let range = document.createRange();
             //     let set = window.getSelection();
-            //     range.setStart( editorRef.current.childNodes[0], text.length);
+            //     range.setStart( editorRef.current.childNodes[0], text.leqngth);
             //     range.collapse(true);
             //     set.removeAllRanges();
             //     set.addRange(range);
