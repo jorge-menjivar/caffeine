@@ -1,4 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
+import { KeyboardEvent } from 'electron'
+
 // import '../watcher/watcher';
 import '../../css/editor.css';
 
@@ -10,7 +12,14 @@ function App() {
     const [focus, setFocus] = useState(0)
     let tmpRef = React.createRef<HTMLDivElement>()
     const [blocks, setBlocks] = useState([{
-        component: <BlockComponent onKeyPress={KeyListener} onClick={ClickListener} key={0} id={0} innerRef={tmpRef}/>,
+        component: <BlockComponent
+            onKeyPress={KeyListener}
+            onClick={ClickListener}
+            onSave={SaveListener}
+            key={0}
+            id={0}
+            innerRef={tmpRef}
+        />,
         id: 0,
         ref: tmpRef
     }]);
@@ -54,6 +63,10 @@ function App() {
         return;
     }
 
+    function SaveListener(event: KeyboardEvent) {
+        console.log("in save listener")
+    }
+
     function manageBackspace(currentBlockID: number, isEmpty: boolean) {
         // Deleting current block
         if (isEmpty && currentBlockID !== 0){
@@ -88,7 +101,14 @@ function App() {
             setBlocks([
                 ...blocksRef.current,
                 {
-                    component: <BlockComponent onKeyPress={KeyListener} onClick={ClickListener} key={nextBlockID} id={nextBlockID} innerRef={ref}/>,
+                    component: <BlockComponent
+                        onKeyPress={KeyListener}
+                        onClick={ClickListener}
+                        onSave={SaveListener}
+                        key={nextBlockID}
+                        id={nextBlockID}
+                        innerRef={ref}
+                    />,
                     id: nextBlockID,
                     ref: ref
                 }

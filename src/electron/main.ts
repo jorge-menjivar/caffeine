@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import * as path from 'path';
 import isDev from 'electron-is-dev'
 
@@ -16,8 +16,8 @@ function createWindow () {
             // defaultFontSize: 24,
             // defaultMonospaceFontSize: 20,
             preload: path.join(__dirname, 'preload.js'),
-            // nodeIntegration: true,
-            // contextIsolation: false,
+            nodeIntegration: true,
+            contextIsolation: false,
             textAreasAreResizable: false
         }
     })
@@ -69,3 +69,21 @@ app.on('activate', () => {
 ipcMain.on('re-render', () => {
     mainWindow.loadFile(path.join(__dirname, 'index.html')).then(r => {})
 })
+
+ipcMain.on('open_file', (event) => {
+    event.returnValue = dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
+});
+
+ipcMain.on('save', (event) => {
+    var options = {
+        title: "Save file",
+        defaultPath : "my_filename",
+        buttonLabel : "Save",
+
+        filters :[
+            {name: 'txt', extensions: ['txt']},
+            {name: 'All Files', extensions: ['*']}
+        ]
+    };
+    event.returnValue = dialog.showSaveDialog(options)
+});

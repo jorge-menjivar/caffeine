@@ -2,13 +2,15 @@
   "name": "caffeine",
   "version": "0.1.0",
   "private": true,
-  "main": "dist/main.js",
+  "main": "dist/desktop/main.js",
   "overrides": {
     "prosemirror-tables": "^1.1.1"
   },
   "scripts": {
-    "electron": "electron .",
-    "build": "webpack --config webpack.config.js"
+    "desktop": "electron .",
+    "build": "webpack --config webpack.config.js",
+    "ios": "exec cap run ios",
+    "android": "exec cap run android"
   },
   "browserslist": {
     "production": [
@@ -24,6 +26,7 @@
   },
   "dependencies": {
     "@capacitor/android": "^3.4.3",
+    "@capacitor/filesystem": "^1.1.0",
     "@capacitor/ios": "^3.4.3",
     "@types/react-latex": "^2.0.0",
     "bootstrap": "^5.1.3",

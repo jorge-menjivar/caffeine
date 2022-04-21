@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {KeyboardEvent, useRef} from "react";
 import {BlockRenderer} from "./block_renderer";
 import {BlockEditor} from "./block_editor";
 
@@ -10,7 +10,7 @@ export function BlockComponent(
     const textRenderer = BlockRenderer(text);
     const textEditor = BlockEditor(text, editorRef, props.id);
 
-    function keyListener(event: any) {
+    function keyListener(event: KeyboardEvent) {
         if (!isCommand()) {
             let isEmpty = editorRef.current.textContent.length === 0;
             props.onKeyPress(event, props.id, isEmpty);
@@ -20,6 +20,11 @@ export function BlockComponent(
                 // save(editorRef.current.textContent)
                 save(event.currentTarget.textContent)
             }
+        }
+
+        if (event.ctrlKey && event.key === "s" || event.ctrlKey && event.key === "S") {
+            console.log("save command")
+            props.onSave(event)
         }
     }
 
