@@ -7,10 +7,9 @@ import {H3Text} from "./text/h3";
 import {H4Text} from "./text/h4";
 import {MonacoEditor} from "./code/monaco_editor";
 
-export function BlockRenderer(value: string) {
+export function BlockRenderer(value: string, type: string) {
     let ref = useRef<HTMLDivElement>(null);
     let editor: monaco.editor.IStandaloneCodeEditor;
-    let type = 'text-line';
 
     useEffect(() => {
         if (type === 'code' && ref.current) {
@@ -31,41 +30,9 @@ export function BlockRenderer(value: string) {
         }
     })
 
-    if (value[0] === "#") {
-        if (value[1] === " "){
-            type = 'h1';
-            console.log("h1")
-        }
-        else if (value[1] === "#") {
-            if (value[2] === " ") {
-                type = 'h2';
-                console.log("h2")
-            }
-            else if (value[2] === "#") {
-                if (value[3] === " ") {
-                    type = 'h3';
-                    console.log("h3")
-                }
-                else if (value[3] === "#" && value[4] === " ") {
-                    type = 'h4';
-                    console.log("h4")
-                }
-                else {
-                    console.log("text-line")
-                }
-            }
-        }
-    }
-
-    // Text is a command
-    else if (value === "\\code") {
-        console.log("code command")
-        type = 'code';
-    }
-
     let child: ReactElement;
     switch(type) {
-        case 'text-line':
+        case 'text':
             child = TextLine(value);
             break;
         case 'h1':

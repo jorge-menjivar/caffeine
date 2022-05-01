@@ -4,53 +4,29 @@ import { ipcRenderer, KeyboardEvent } from 'electron'
 // import '../watcher/watcher';
 import '../../css/editor.css';
 
-
-import { BlockComponent } from './blocks/desktop_block'
+import { NotebookData } from '../common/notebook_data';
 
 function App() {
-
-    const [focus, setFocus] = useState(0)
-    let tmpRef = React.createRef<HTMLDivElement>()
-    const [blocks, setBlocks] = useState([{
-        component: <BlockComponent
-            onKeyPress={KeyListener}
-            onClick={ClickListener}
-            onSave={SaveListener}
-            key={0}
-            id={0}
-            innerRef={tmpRef}
-        />,
-        id: 0,
-        ref: tmpRef
-    }]);
-
-    // The following implementation allows the callbacks to KeyListener to have access to up-to-date
-    // information in the blocks state. If accessing the blocks state directly, this returns a stale value.
-    const blocksRef = useRef(blocks);
-    blocksRef.current = blocks;
-    const focusRef = useRef(focus);
-    focusRef.current = focus;
+    const data = React.useRef(new NotebookData(KeyListener, ClickListener, SaveListener))
+    const [updateTime, setUpdateTime] = React.useState(+ new Date())
 
     useEffect(() => {
-        console.log(`focus on block ${focusRef.current}`)
-        console.log(blocksRef.current)
+        console.log('changes in data')
+    }, [data])
 
-        let ref = blocksRef.current.filter((block) => block.id === focusRef.current)[0].ref
+    useEffect(() => {
+        let ref = data.current.getFocusRef()
 
         if (ref.current) {
-            // refsRef.current.get(focusRef.current).ref.current.focus();
             ref.current.click();
         }
-    }, [focus])
-
-    useEffect(() => {
-        console.log(`block change detected`)
-    }, [blocks])
+    }, [updateTime])
 
     function ClickListener(event: any, id: number) {
         // Update focus to clicked block
-        setFocus(id);
-        return;
+        data.current.setFocus(id);
+
+        setUpdateTime(+ new Date())
     }
 
     function KeyListener(event: any, id: number, isEmpty: boolean) {
@@ -60,34 +36,35 @@ function App() {
         else if (event.key == "Backspace") {
             manageBackspace(id, isEmpty);
         }
-        return;
+        
+        setUpdateTime(+ new Date())
     }
 
     function SaveListener(event: KeyboardEvent) {
         console.log("in save listener")
-        ipcRenderer.send('save');
+        // blocksRef.current.map((block) => {
+        //     // block.ref.current.getAlert();
+        // })
+
+        let file_data = {
+            lines: data.current.getAllLines(),
+            order: data.current.getOrder()
+        }
+        ipcRenderer.send('save', file_data);
+
+        setUpdateTime(+ new Date())
     }
 
     function manageBackspace(currentBlockID: number, isEmpty: boolean) {
         // Deleting current block
         if (isEmpty && currentBlockID !== 0){
-            let currentIndex : number = blocksRef.current.findIndex((block) => block.id === currentBlockID);
-            let prevBlockID : number = blocksRef.current[currentIndex-1].id;
-            console.log(`Deleting block ${currentBlockID}. Index ${currentIndex}`)
-
-            blocksRef.current.splice(currentIndex, 1);
-            setBlocks(blocksRef.current);
-            console.log(`attempt to change focus to ${prevBlockID}`)
-            setFocus(prevBlockID);
-            // console.log('Updated blocks array:')
-            // console.log(blocks)
+            data.current.deleteLine(currentBlockID)
         }
-        return;
     }
 
     function manageEnter(currentBlockID: number) {
-        let currentIndex : number = blocksRef.current.findIndex((block) => block.id === currentBlockID)
-        let lastBlockID : number = blocksRef.current[blocksRef.current.length-1].id
+        let currentIndex : number = data.current.getFocusIndex()
+        let lastBlockID : number = data.current.getLastBlockID()
         let nextBlockID : number = + new Date();
 
         // console.log(`current block ${currentBlockID}`)
@@ -97,38 +74,17 @@ function App() {
         // Add new block if user is on the last block already
         if (currentBlockID === lastBlockID) {
             // console.log("last block, making new one")
-            let ref = React.createRef<HTMLDivElement>();
-
-            setBlocks([
-                ...blocksRef.current,
-                {
-                    component: <BlockComponent
-                        onKeyPress={KeyListener}
-                        onClick={ClickListener}
-                        onSave={SaveListener}
-                        key={nextBlockID}
-                        id={nextBlockID}
-                        innerRef={ref}
-                    />,
-                    id: nextBlockID,
-                    ref: ref
-                }
-            ]);
+            data.current.appendLine(nextBlockID)
         }
         else {
-            nextBlockID = blocksRef.current[currentIndex+1].id
+            data.current.addLine(nextBlockID, currentIndex+1)
         }
-
-        // console.log(`current focus: ${focusRef.current}`)
-        // console.log(`attempt to change focus to ${nextBlockID}`)
-        // Change focus to the next block
-        setFocus(nextBlockID);
-        return;
     }
 
+    let blocks = data.current.getBlocks()
     return (
         <div className="note">
-            {blocks.map((block) => block.component)}
+            {blocks.map((block) => block)}
         </div>
     );
 }

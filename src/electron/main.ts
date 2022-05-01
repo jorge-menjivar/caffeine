@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import * as path from 'path';
 import isDev from 'electron-is-dev'
+const fs = require('fs');
 
 let mainWindow: BrowserWindow;
 
@@ -74,16 +75,48 @@ ipcMain.on('open_file', (event) => {
     event.returnValue = dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
 });
 
-ipcMain.on('save', (event) => {
+function replacer(key: string, value: any) {
+    if(value instanceof Map) {
+      return {
+        dataType: 'Map',
+        value: Array.from(value.entries()),
+      };
+    } else {
+      return value;
+    }
+}
+
+function reviver(key: string, value: any) {
+    if(typeof value === 'object' && value !== null) {
+      if (value.dataType === 'Map') {
+        return new Map(value.value);
+      }
+    }
+    return value;
+}
+
+ipcMain.on('save', async (event, file_data) => {
     var options = {
         title: "Save file",
-        defaultPath : "my_filename",
+        defaultPath : "my_note.cafe",
         buttonLabel : "Save",
 
         filters :[
-            {name: 'txt', extensions: ['txt']},
+            {name: 'Caffeine Note', extensions: ['cafe']},
             {name: 'All Files', extensions: ['*']}
         ]
     };
-    event.returnValue = dialog.showSaveDialog(options)
+    event.returnValue = await dialog.showSaveDialog(options)
+
+    let json_data = JSON.stringify(file_data, replacer)
+
+    try {
+        let file_path = event.returnValue.filePath
+        await fs.writeFileSync(file_path, json_data, 'utf-8');
+        console.log('Saved the file !');
+    }
+    catch(e) {
+        console.log(e)
+        console.log('Failed to save the file !');
+    }
 });
