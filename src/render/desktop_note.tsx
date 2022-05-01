@@ -7,7 +7,7 @@ import '../../css/editor.css';
 import { NotebookData } from '../common/notebook_data';
 
 function App() {
-    const data = React.useRef(new NotebookData(KeyListener, ClickListener, SaveListener))
+    const data = React.useRef(new NotebookData(KeyListener, ClickListener))
     const [updateTime, setUpdateTime] = React.useState(+ new Date())
 
     useEffect(() => {
@@ -29,23 +29,25 @@ function App() {
         setUpdateTime(+ new Date())
     }
 
-    function KeyListener(event: any, id: number, isEmpty: boolean) {
-        if (event.key === "Enter") {
-            manageEnter(id);
+    function KeyListener(event: any, id: number, isEmpty: boolean, isCommand: boolean) {
+        if (!isCommand) {
+            if (event.key === "Enter") {
+                manageEnter(id);
+            }
+            else if (event.key == "Backspace") {
+                manageBackspace(id, isEmpty);
+            }
+            if (event.ctrlKey && event.key === "s" || event.ctrlKey && event.key === "S") {
+                console.log("save command")
+                save(event)
+            }
+            
+            setUpdateTime(+ new Date())
         }
-        else if (event.key == "Backspace") {
-            manageBackspace(id, isEmpty);
-        }
-        
-        setUpdateTime(+ new Date())
     }
 
-    function SaveListener(event: KeyboardEvent) {
+    function save(event: KeyboardEvent) {
         console.log("in save listener")
-        // blocksRef.current.map((block) => {
-        //     // block.ref.current.getAlert();
-        // })
-
         let file_data = {
             lines: data.current.getAllLines(),
             order: data.current.getOrder()

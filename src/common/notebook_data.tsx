@@ -1,5 +1,5 @@
 import React from 'react';
-import { BlockComponent } from '../render/blocks/desktop_block'
+import { BlockComponent } from '../render/blocks/block'
 
 export class NotebookData {
     private lines : Map<number, any>  = new Map();
@@ -8,14 +8,11 @@ export class NotebookData {
     private blocks : Array<any> = new Array();
     private key_listener : any;
     private click_listener : any;
-    private save_listener : any;
     private refs: Array<any> = new Array();
 
-    constructor(key_listener: any, click_listener: any, save_listener: any) {
+    constructor(key_listener: any, click_listener: any) {
         this.key_listener = key_listener
         this.click_listener = click_listener
-        this.save_listener = save_listener
-
         this.appendLine(0)
     }
 
@@ -48,7 +45,6 @@ export class NotebookData {
         this.blocks.push(<BlockComponent
             onKeyPress={this.key_listener}
             onClick={this.click_listener}
-            onSave={this.save_listener}
             key={id}
             id={id}
             innerRef={ref}
@@ -74,7 +70,6 @@ export class NotebookData {
         this.blocks.push(<BlockComponent
             onKeyPress={this.key_listener}
             onClick={this.click_listener}
-            onSave={this.save_listener}
             key={id}
             id={id}
             innerRef={ref}

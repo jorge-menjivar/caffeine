@@ -6,8 +6,7 @@ import { NotebookData } from '../../common/notebook_data'
 export function BlockComponent(
     props: {
         onKeyPress: any,
-        onClick:any, 
-        onSave:any,
+        onClick:any,
         id: number,
         innerRef: any,
         data: NotebookData
@@ -22,18 +21,12 @@ export function BlockComponent(
     const textEditor = BlockEditor(text, editorRef, props.id);
 
     function keyListener(event: KeyboardEvent) {
+        let isEmpty = editorRef.current.textContent.length === 0;
+        props.onKeyPress(event, props.id, isEmpty, isCommand());
         if (!isCommand()) {
-            let isEmpty = editorRef.current.textContent.length === 0;
-            props.onKeyPress(event, props.id, isEmpty);
-
             if (event.key === "Enter") {
                 save(event.currentTarget.textContent)
             }
-        }
-
-        if (event.ctrlKey && event.key === "s" || event.ctrlKey && event.key === "S") {
-            console.log("save command")
-            props.onSave(event)
         }
     }
 
